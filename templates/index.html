@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	
+	<title>Evidencija servisa vozila</title>
+
+</head>
+<body>
+
+	<h1>Evidencija servisa vozila</h1>
+
+{% for poruka in upozorenje %}
+    <p class="upozorenje">{{ poruka }}</p>
+{% endfor %}
+	
+{% if poruka %}
+    <p class="poruka">{{ poruka }}</p>
+{% endif %}
+
+<h2>Dodavanje vozila</h2>
+<form method="POST" action="">
+
+	<label>Marka vozila:</label>
+	<input type="text" name="marka_vozila" required>
+	<br>
+
+	<label>Model vozila:</label>
+	<input type="text" name="model_vozila" required>
+	<br>
+
+	<label>Godiste:</label>
+	<input type="number" name="godiste" min="1900" required>
+	<br>
+
+	<label>Registarska oznaka:</label>
+	<input type="text" name="registarska_oznaka" required>
+	<br>
+
+	<label>Broj sasije_VIN:</label>
+	<input type="text" name="broj_sasije_vin">
+	<br>
+
+	<label>Trenutna kilometraza:</label>
+	<input type="number" name="trenutna_kilometraza" min="0" required>
+	<br>
+
+	<button type="submit" name="akcija" value="dodaj_vozilo">Dodaj vozilo</button>
+</form>
+
+<h2>Evidencija servisa</h2>
+<form method="POST" action="">
+	
+	<label>Unesite ID vozila:</label>
+	<input type="number" name="unesite_id_vozila" min="1" required>	<br>
+
+	<label>Datum servisa:</label>
+	<input type="date" name="datum_servisa" required>
+	<br>
+
+	<label>Kilometraza na kojoj je servis uradjen:</label>
+	<input type="number" name="kilometraza_na_kojoj_je_servis_uradjen" min="0" required>
+	<br>
+
+	<label>Vrsta servisa mali servis, veliki servis, popravka...:</label>
+	<input type="text" name="vrsta_servisa" required>
+	<br>
+
+	<label>Opis sta je uradjeno:</label>
+	<input type="text" name="opis_sta_je_uradjeno" required>
+	<br>
+
+	<label>Koji dio dijelovi su zamijenjeni:</label>
+	<input type="text" name="koji_dio_dijelovi_su_zamijenjeni">
+	<br>
+
+	
+	<label>Naziv servisa radionice:</label>
+	<input type="text" name="naziv_servisa" required>
+	<br>
+
+	<label>Cijena servisa:</label>
+	<input type="number" name="cijena_servisa" min="0" step="0.01" required>
+	<br>
+
+	<label>Dodatna napomena:</label>
+	<input type="text" name="dodatna_napomena">
+	<br>
+
+	<button type="submit" name="akcija" value="dodaj_servis">dodaj servis</button>
+
+	</form>
+
+<h2>Istorija servisa</h2>
+<form method="POST" action="">
+
+	<label>Unesite ID vozila:</label>
+	<input type="number" name="unesite_id_vozila" min="1" required>	<br>
+
+	<label>Prikazati sve prethodne servise:</label>
+	<button type="submit" name="akcija" value="prikazati_servise">prikazati servise</button>
+	<br>
+
+</form>
+
+{% for servis in servisi %}
+	<p>Vozilo: {{ servis[10] }} {{ servis[11] }}</p>
+    <p>ID servisa: {{ servis[0] }}</p>
+    <p>ID vozila: {{ servis[1] }}</p>
+    <p>Datum servisa: {{ servis[2] }}</p>
+    <p>Kilometraža vozila: {{ servis[3] }}</p>
+    <p>Vrsta servisa: {{ servis[4] }}</p>
+    <p>Opis servisa: {{ servis[5] }}</p>
+    <p>Zamijenjeni dijelovi: {{ servis[6] }}</p>
+    <p>Naziv servisa: {{ servis[7] }}</p>
+    <p>Cijena servisa: {{ servis[8] }}</p>
+    <p>Dodatna napomena: {{ servis[9] }}</p>
+{% endfor %}
+
+<h2>Izmjena servisnog zapisa</h2>
+
+<form method="POST" action="">
+
+    <label>Unesite ID servisa koji zelite izmijeniti:</label>
+    <input type="number" name="id_servisa_izmjena" min="1" required>
+    <br>
+
+    <label>Novi datum servisa:</label>
+    <input type="date" name="novi_datum_servisa" required>
+    <br>
+
+    <label>Nova kilometraza:</label>
+    <input type="number" name="nova_kilometraza_servisa" min="0" required>
+    <br>
+
+    <label>Nova vrsta servisa:</label>
+    <input type="text" name="nova_vrsta_servisa" required>
+    <br>
+
+    <label>Novi opis servisa:</label>
+    <input type="text" name="novi_opis_servisa" required>
+    <br>
+
+    <label>Novi zamijenjeni dijelovi:</label>
+    <input type="text" name="novi_zamijenjeni_dijelovi">
+    <br>
+
+    <label>Novi naziv servisa/radionice:</label>
+    <input type="text" name="novi_naziv_servisa" required>
+    <br>
+
+    <label>Nova cijena servisa:</label>
+    <input type="number" name="nova_cijena_servisa" min="0" step="0.01" required>
+    <br>
+
+    <label>Nova dodatna napomena:</label>
+    <input type="text" name="nova_dodatna_napomena">
+    <br>
+
+    <button type="submit" name="akcija" value="izmijeni_servis">
+        Sacuvaj izmjene servisa
+    </button>
+
+</form>
+
+<h2>Brisanje servisnog zapisa</h2>
+
+<form method="POST" action="">
+
+    <label>Unesite ID servisa koji zelite izbrisati:</label>
+    <input type="number" name="id_servisa" min="1" required>
+    <br>
+
+    <button type="submit" name="akcija" value="obrisi_servis">Obrisi servis</button>
+
+</form>
+
+<h2>Sljedeci servis</h2>
+<form method="POST" action="">
+	
+	<label>Unesite ID vozila:</label>
+	<input type="number" name="unesite_id_vozila" min="1" required>
+	<br>
+	
+	<label>Sljedeci datum:</label>
+	<input type="date" name="sljedeci_datum" required>
+	<br>
+
+	<label>Sljedeca kilometraza:</label>
+	<input type="number" name="sljedeca_kilometraza" min="0" required>
+	<br>
+
+	<button type="submit" name="akcija" value="sacuvaj_sljedeci_servis">sacuvaj sljedeci servis</button>
+
+<h2>Troskovi</h2>
+<form method="POST" action="">
+
+	<label>Unesite ID vozila:</label>
+	<input type="number" name="unesite_id_vozila" min="1" required>
+	<br>
+
+	<label>Vrsta usluge:</label>
+	<input type="text" name="vrsta_usluge" required>
+	<br>
+
+	<label>Cijena dijelova:</label>
+	<input type="number" name="cijena_dijelova" step="0.01" min="0" required>	<br>
+
+	<label>Cijena rada:</label>
+	<input type="number" name="cijena_rada" step="0.01" min="0" required>	<br>
+
+	<button type="submit" name="akcija" value="sacuvaj_troskove">sacuvaj troskove</button>
+
+</form>
+
+<form method="POST" action="">
+
+    <label>Unesite ID vozila za prikaz troškova:</label>
+    <input type="number" name="unesite_id_vozila" min="1" required>
+    <br>
+
+    <button type="submit" name="akcija" value="prikazi_troskove">
+        prikazi troskove
+    </button>
+
+</form>
+
+{% for trosak in troskovi %}
+    <p>ID troška: {{ trosak[0] }}</p>
+    <p>ID vozila: {{ trosak[1] }}</p>
+    <p>Vrsta usluge: {{ trosak[2] }}</p>
+    <p>Cijena dijelova: {{ trosak[3] }} KM</p>
+    <p>Cijena rada: {{ trosak[4] }} KM</p>
+    <p>Ukupna cijena: {{ trosak[5] }} KM</p>
+{% endfor %}
+
+{% if troskovi %}
+    <p>Ukupni troškovi vozila: {{ ukupni_troskovi }} KM</p>
+{% endif %}
+
+<h2>Pretraga vozila</h2>
+<form method="POST" action="">
+
+	<label>Unesite marku vozila:</label>
+	<input type="text" name="unesite_marku_vozila" required>
+	<br>
+
+	<button type="submit" name="akcija" value="pretrazi_vozila">pretrazi vozila</button>
+		
+</form>
+
+<form method="POST" action="">
+
+	<button type="submit" name="akcija" value="prikazi_sva_vozila">Prikazi sva vozila</button>
+
+</form>
+
+{% for vozilo in vozila %}
+	<p>ID: {{ vozilo[0] }}</p>
+    <p>marka_vozila: {{ vozilo[1] }}</p>
+    <p>model_vozila: {{ vozilo[2] }}</p>
+    <p>godiste: {{ vozilo[3] }}</p>
+	<p>registarska_oznaka: {{ vozilo[4] }}</p>
+	<p>broj_sasije_vin: {{ vozilo[5] }}</p>
+	<p>trenutna_kilometraza: {{ vozilo[6] }}</p>
+
+{% endfor %}
+
+<h2>Izmjena podataka o vozilu</h2>
+<form method="POST" action="">
+
+	<label>Unesite ID vozila koji zelite izmjeniti:</label>
+    <input type="number" name="unesite_id_vozila" min="1" required>
+    <br>
+
+	<label>Nova marka vozila:</label>
+    <input type="text" name="nova_marka_vozila" required>
+    <br>
+
+	<label>Novi model vozila:</label>
+	<input type="text" name="novi_model_vozila">
+	<br>
+
+	<label>Novo godiste:</label>
+	<input type="number" name="novo_godiste" min="1900">
+	<br>
+
+	<label>Nova registarska oznaka:</label>
+	<input type="text" name="nova_registarska_oznaka">
+	<br>
+
+	<label>Novi broj sasije_VIN:</label>
+	<input type="text" name="novi_broj_sasije_vin">
+	<br>
+
+	<label>Nova kilometraza:</label>
+	<input type="number" name="nova_kilometraza" min="0">
+	<br>
+
+	<button type="submit" name="akcija" value="sacuvaj_izmjene">sacuvaj izmjene</button>
+
+</form>
+
+<h2>Brisanje vozila</h2>
+<form method="POST" action="">
+
+	<label>Unesite ID vozila koje zelite izbrisati:</label>
+    <input type="number" name="unesite_id_vozila" min="1" required>
+    <br>
+
+	<button type="submit" name="akcija" value="obrisi_vozilo">Obrisi vozilo</button>
+
+</form>
+
+</body>
+</html>

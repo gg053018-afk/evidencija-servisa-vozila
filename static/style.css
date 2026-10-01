@@ -1,0 +1,109 @@
+body {
+    background-color: lightgray;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: green;
+    font-size: 36px;
+}
+
+h2 {
+    color: red;
+    font-size: 24px;
+    text-align: left;
+    margin-left: 20px;
+}
+
+label {
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+}
+
+input {
+    width: 250px;
+    padding: 8px;
+    margin: 5px 0px;
+    border-radius: 5px;
+}
+
+input:focus {
+    border: 2px solid green;
+}
+
+button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: block;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: rgb(100, 0, 43);
+    cursor: pointer;
+}
+
+form {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding: 15px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: 340px;
+}
+
+p {
+    font-size: 18px;
+    color: black;
+    margin-left: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+th, td {
+    border: 1px solid gray;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background: rgb(199, 9, 9);
+    color: black;
+    font-weight: bold;
+}
+
+.upozorenje {
+    color: red;
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 2px solid red;
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.poruka {
+    color: green;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid green;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 300px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+}
